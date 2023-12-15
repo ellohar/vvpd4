@@ -27,47 +27,58 @@ def generate_integer_matrix(rows, columns):
 def rect_sum(integral_image, x1, y1, x2, y2):
 
     sum_a = integral_image[y1-1, x1-1]
-    print(sum_a)
     sum_b = integral_image[y1-1, x2]
-    print(sum_b)
     sum_c = integral_image[y2, x2]
-    print(sum_c)
     sum_d = integral_image[y2, x1-1]
-    print(sum_d)
-    print()
 
     sum_of_rect = sum_a + sum_c - sum_b - sum_d
 
     return sum_of_rect
 
 
-rect = generate_integer_matrix(5, 6)
-print(rect)
-print()
-print(rect[2-1, 2-1], rect[4-1, 4-1])
-print()
-print(integral_view(rect))
-print()
-print(rect_sum(integral_view(rect), x1=2-1, y1=2-1, x2=4-1, y2=4-1))
-
-
 def main():
     while True:
-        menu = '----------------------------------------------------------------\n' \
+        menu = '\n' \
                'enter what do you want to do:\n' \
                '(1) - to see integral image;\n' \
                '(2) - to calculate sum of pixels in rectangle;\n' \
                '(3) - to see both integral image and sum of pixels in rectangle;\n' \
-               '(4) - to exit\n' \
-               '----------------------------------------------------------------'
+               '(4) - to exit'
         print(menu)
         request = input()
+        print()
         if request == '1':
             rows, columns = input('enter the amount of rows and columns separate by space\n').split()
+            print()
             img = generate_integer_matrix(int(rows), int(columns))
             print(img)
             print()
             print(integral_view(img))
+
+        elif request == '2':
+            rows, columns = input('enter the amount of rows and columns separate by space\n').split()
+            print()
+            img = generate_integer_matrix(int(rows), int(columns))
+            print(img)
+            print()
+            x1, y1 = input('enter the coordinates of left top corner of the rectangle separated by space\n').split()
+            x2, y2 = input('enter the coordinates of right bottom corner of the rectangle separated by space\n').split()
+            print()
+            print(rect_sum(integral_view(img), int(x1)-1, int(y1)-1, int(x2)-1, int(y2)-1))
+
+        elif request == '3':
+            rows, columns = input('enter the amount of rows and columns separate by space\n').split()
+            print()
+            img = generate_integer_matrix(int(rows), int(columns))
+            print(img)
+            print()
+            print(integral_view(img))
+            print()
+            x1, y1 = input('enter the coordinates of left top corner of the rectangle separated by space\n').split()
+            print()
+            x2, y2 = input('enter the coordinates of right bottom corner of the rectangle separated by space\n').split()
+            print()
+            print(rect_sum(integral_view(img), int(x1) - 1, int(y1) - 1, int(x2) - 1, int(y2) - 1))
 
         elif request == '4':
             sys.exit()
